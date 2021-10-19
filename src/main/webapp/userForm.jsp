@@ -27,11 +27,10 @@
 <section>
     <h3><a href="index.html">Home</a></h3>
     <hr>
-    <h2>${param.action == 'create' ? 'Create user' : 'Edit user'}</h2>
+    <h2>${param.action == 'create' ? 'Добавить пользователя' : 'Зудактировать пользователя'}</h2>
     <jsp:useBean id="user" type="ru.javawebinar.topjava.model.User" scope="request"/>
     <form method="post" action="users">
         <input type="hidden" name="id" value="${user.id}">
-        <input type="hidden" name="password" value="${user.password}">
         <dl>
             <dt>Имя:</dt>
             <dd><input type="text" value="${user.name}" size=40 name="name" required></dd>
@@ -44,16 +43,8 @@
             <dt>Пароль:</dt>
             <dd><input type="text" value="${user.password}" name="password" required></dd>
         </dl>
-        <dl>
-            <dt>Роль:</dt>
-            <dd><input type="text" value="${user.roles}" name="roles" required></dd>
-        </dl>
-        <dl>
-            <dt>Зарегистрирован:</dt>
-            <dd><input type="datetime-local" value="${user.registered}" name="registered" required></dd>
-        </dl>
-        <button type="submit">Save</button>
-        <button onclick="window.history.back()" type="button">Cancel</button>
+        <button type="submit">Сохранить</button>
+        <button onclick="window.history.back()" type="button">Отменить</button>
     </form>
 </section>
 </body>

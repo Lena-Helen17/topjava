@@ -30,8 +30,8 @@
             <td>${user.roles}</td>
             <td>${user.enabled}</td>
             <td>${user.password}</td>
-            <td><a href="users?action=update&id=${user.id}">Update</a></td>
-            <td><a href="users?action=delete&id=${user.id}">Delete</a></td>
+            <td><a href="users?action=update&id=${user.id}">Обновить</a></td>
+            <td><a href="users?action=delete&id=${user.id}">Удалить</a></td>
             </tr>
         </c:forEach>
     </table>
