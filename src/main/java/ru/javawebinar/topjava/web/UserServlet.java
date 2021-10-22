@@ -5,7 +5,6 @@ import ru.javawebinar.topjava.model.Role;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.repository.UserRepository;
 import ru.javawebinar.topjava.repository.inmemory.InMemoryUserRepository;
-import ru.javawebinar.topjava.util.MealsUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -35,8 +34,7 @@ public class UserServlet extends HttpServlet {
                 request.getParameter("name"),
                 request.getParameter("email"),
                 request.getParameter("password"),
-                Role.valueOf(request.getParameter("roles"))
-        );
+                Role.USER);
 
         log.info(user.isNew() ? "Create {}" : "Update {}", user);
         repository.save(user);
@@ -66,7 +64,7 @@ public class UserServlet extends HttpServlet {
             case "all":
             default:
                 log.info("getAll");
-               request.setAttribute("users", MealsUtil.users);
+               request.setAttribute("users", repository.getAll());
                 request.getRequestDispatcher("/users.jsp").forward(request, response);
                 break;
         }

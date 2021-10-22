@@ -30,9 +30,9 @@ public class MealsUtil {
     );
 
     public static final List<User> users = Arrays.asList(
-            new User(1, "aaaa", "a@mail.ru", "1aaa", Role.USER),
-            new User(2, "aaaa", "aggg@mail.com", "2aaa", Role.USER,Role.ADMIN),
-            new User(3, "bb", "a@ya.ru", "2bb", Role.ADMIN)
+            new User(12, "aaaa", "a@mail.ru", "1aaa", Role.USER),
+            new User(23, "aaaa", "aggg@mail.com", "2aaa", Role.USER,Role.ADMIN),
+            new User(35, "bb", "a@ya.ru", "2bb", Role.ADMIN)
     );
 
     public static List<MealTo> getTos(Collection<Meals> meals, int caloriesPerDay) {
