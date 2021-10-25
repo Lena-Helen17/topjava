@@ -13,7 +13,6 @@ import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.Assert.assertThrows;
@@ -58,14 +57,24 @@ public class MealServiceTest {
     }
 
     @Test
+    public void getAdminId() {
+        assertThrows(NotFoundException.class, () -> service.get(MEAL_ID, ADMIN_ID));
+    }
+
+    @Test
     public void delete() {
-        service.delete(MEAL_ID, USER_ID);
+        service.delete(MEAL_ID,USER_ID);
         assertThrows(NotFoundException.class, () -> service.get(MEAL_ID, USER_ID));
     }
 
     @Test
     public void deletedNotFound() {
         assertThrows(NotFoundException.class, () -> service.delete(NOT_FOUND, USER_ID));
+    }
+
+    @Test
+    public void deletedAdminId() {
+        assertThrows(NotFoundException.class, () -> service.delete(MEAL_ID,ADMIN_ID));
     }
 
     @Test
