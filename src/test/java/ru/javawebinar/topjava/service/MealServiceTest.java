@@ -17,7 +17,8 @@ import java.util.List;
 
 import static org.junit.Assert.assertThrows;
 import static ru.javawebinar.topjava.MealTestData.*;
-import static ru.javawebinar.topjava.UserTestData.NOT_FOUND;
+import static ru.javawebinar.topjava.UserTestData.ADMIN_ID;
+import static ru.javawebinar.topjava.UserTestData.USER_ID;
 
 
 @ContextConfiguration({
@@ -57,7 +58,7 @@ public class MealServiceTest {
     }
 
     @Test
-    public void getAdminId() {
+    public void getUserMealByIdForeign() {
         assertThrows(NotFoundException.class, () -> service.get(MEAL_ID, ADMIN_ID));
     }
 
@@ -73,15 +74,15 @@ public class MealServiceTest {
     }
 
     @Test
-    public void deletedAdminId() {
+    public void deletedForeignId() {
         assertThrows(NotFoundException.class, () -> service.delete(MEAL_ID,ADMIN_ID));
     }
 
     @Test
     public void getBetweenInclusive() {
         List<Meal> mealList = service.getBetweenInclusive(LocalDate.of(2021, 10, 24),
-                LocalDate.of(2021, 10, 26), USER_ID);
-        assertMatch(mealList.stream().findFirst().orElse(null), meal);
+                LocalDate.of(2021, 10, 25), USER_ID);
+        assertMatch(mealList, meal, meal5, meal6, meal7, meal4);
     }
 
     @Test
@@ -92,7 +93,7 @@ public class MealServiceTest {
     }
 
     @Test
-    public void updateAdminId() {
+    public void updateForeignId() {
         Meal updated = getUpdated();
         assertThrows(NotFoundException.class, () -> service.update(updated, ADMIN_ID));
     }
@@ -100,6 +101,6 @@ public class MealServiceTest {
     @Test
     public void getAll() {
         List<Meal> all = service.getAll(USER_ID);
-        assertMatch(all, mealsList);
+        assertMatch(all, meal, meal5, meal6, meal7, meal4, meal2, meal3 );
     }
 }
