@@ -16,6 +16,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 import static ru.javawebinar.topjava.MealTestData.*;
 import static ru.javawebinar.topjava.UserTestData.ADMIN_ID;
 import static ru.javawebinar.topjava.UserTestData.USER_ID;
@@ -84,6 +85,10 @@ public class MealServiceTest {
                 LocalDate.of(2021, 10, 25), USER_ID);
         assertMatch(mealList, meal, meal5, meal6, meal7, meal4);
     }
+
+    @Test
+    public void getBetweenNotFound() {assertTrue(service.getBetweenInclusive (LocalDate.of(2021, 10, 27),
+            LocalDate.of(2021, 10, 29), ADMIN_ID).isEmpty());}
 
     @Test
     public void update() {

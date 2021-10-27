@@ -6,16 +6,17 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static ru.javawebinar.topjava.model.AbstractBaseEntity.START_SEQ;
 
 public class MealTestData {
-    public static final int MEAL_ID3 = 100004;
-    public static final int MEAL_ID4 = 100005;
-    public static final int MEAL_ID5= 100009;
-    public static final int MEAL_ID6= 100012;
-    public static final int MEAL_ID7= 100013;
-    public static final int MEAL_ID2 = 100007;
-    public static final int MEAL_ID = 100011;
-    public static final int NOT_FOUND = 10;
+    public static final int MEAL_ID3 = START_SEQ + 4;
+    public static final int MEAL_ID4 = START_SEQ + 5;
+    public static final int MEAL_ID5= START_SEQ + 9;
+    public static final int MEAL_ID6= START_SEQ + 12;
+    public static final int MEAL_ID7= START_SEQ + 13;
+    public static final int MEAL_ID2 = START_SEQ +7;
+    public static final int MEAL_ID = START_SEQ + 11;
+    public static final int NOT_FOUND = START_SEQ - 20;
 
     public static final Meal meal =  new Meal(MEAL_ID, LocalDateTime.of(2021, 10, 25, 20, 00, 00), "Ужин", 600);
     public static final Meal meal2 =  new Meal(MEAL_ID2, LocalDateTime.of(2021, 10, 23, 13, 32, 00), "Обед", 730);
@@ -34,11 +35,11 @@ public class MealTestData {
     }
 
     public static Meal getNew() {
-        return new Meal(null, LocalDateTime.now(), "Новая еда", 600);
+        return new Meal(null, LocalDateTime.of(2222, 02, 22, 22, 22, 22), "Новая еда", 600);
     }
 
     public static void assertMatch(Meal actual, Meal expected) {
-        assertThat(actual).usingRecursiveComparison().ignoringFields("dateTime").isEqualTo(expected);
+        assertThat(actual).usingRecursiveComparison().isEqualTo(expected);
     }
 
     public static void assertMatch(Iterable<Meal> actual, Meal... expected) {
@@ -46,6 +47,6 @@ public class MealTestData {
     }
 
     public static void assertMatch(Iterable<Meal> actual, Iterable<Meal> expected) {
-        assertThat(actual).usingRecursiveFieldByFieldElementComparatorIgnoringFields("dateTime").isEqualTo(expected);
+        assertThat(actual).usingRecursiveFieldByFieldElementComparatorIgnoringFields().isEqualTo(expected);
     }
 }
