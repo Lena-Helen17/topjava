@@ -100,8 +100,8 @@ public class MealServiceTest {
     @Test
     public void getBetweenInclusive() {
         MEAL_MATCHER.assertMatch(service.getBetweenInclusive(
-                        LocalDate.of(2020, Month.JANUARY, 30),
-                        LocalDate.of(2020, Month.JANUARY, 30), USER_ID),
+                LocalDate.of(2020, Month.JANUARY, 30),
+                LocalDate.of(2020, Month.JANUARY, 30), USER_ID),
                 meal3, meal2, meal1);
     }
 

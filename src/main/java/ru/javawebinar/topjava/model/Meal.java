@@ -1,23 +1,49 @@
 package ru.javawebinar.topjava.model;
 
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+@NamedQueries(value = {
+        @NamedQuery(name = Meal.DELETE, query = "DELETE FROM Meal m WHERE m.id=:id"),
+        @NamedQuery(name = Meal.ALL_SORTED, query = "SELECT m FROM Meal m WHERE :user_id=?1"),
+        @NamedQuery(name= Meal.SAVE, query = "SELECT ")
+})
+@Entity
+@Table(name= "meals")
 public class Meal extends AbstractBaseEntity {
-    private LocalDateTime dateTime;
 
+    public static final String DELETE = "Meal.delete";
+    public static final String SAVE = "Meal.save";
+    public static final String ALL_SORTED = "Meal.getAllSorted";
+
+    @Column(name = "date_time", nullable = false, columnDefinition = "timestamp default now()")
+    @DateTimeFormat
+    private LocalDateTime dateTime = LocalDateTime.now();
+
+    @Column(name = "description")
+    @NotNull
+    @Size(min = 2)
     private String description;
 
+    @Column(name =  "calories")
+    @NotNull
     private int calories;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     public Meal() {
     }
+
+    public Meal(Meal m){this(m.id, m.dateTime, m.description, m.calories, );}
 
     public Meal(LocalDateTime dateTime, String description, int calories) {
         this(null, dateTime, description, calories);
