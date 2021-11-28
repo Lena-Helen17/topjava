@@ -4,8 +4,6 @@ import org.assertj.core.matcher.AssertionMatcher;
 import org.junit.jupiter.api.Test;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.model.User;
-import ru.javawebinar.topjava.to.MealTo;
-import ru.javawebinar.topjava.util.MealsUtil;
 
 import java.util.List;
 
@@ -56,5 +54,15 @@ class RootControllerTest extends AbstractControllerTest {
                             }
                         }
                 ));
+    }
+
+    @Test
+    void testCss() throws Exception {
+        perform(get("/"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(view().name("index"))
+            //    .andExpect(model().attribute("Content type", "application/json;charset=UTF-8"))
+                .andExpect(forwardedUrl("/WEB-INF/jsp/index.jsp"));
     }
 }
